@@ -48,11 +48,21 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
+        function obterParametro() {  
+         const queryString = window.location.search;
+         const urlParams = new URLSearchParams(queryString);
+         const apelido = urlParams.get('apelido');
+         return apelido;
+       }
 
       // ****** ITEM 6
       async function carregarJson() {
         try {
-          const apelido = 'ciclano';
+          const apelido = obterParametro();
+          if (!apelido) {
+            alert('Apelido não informado');
+            return;
+          }
           const httpResp = await fetch('/api/pessoas/' + apelido);
           if (!httpResp.ok) {
             alert('Dados não foram carregados');

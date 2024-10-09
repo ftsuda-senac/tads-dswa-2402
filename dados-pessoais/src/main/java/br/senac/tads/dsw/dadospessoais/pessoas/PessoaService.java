@@ -44,5 +44,22 @@ public class PessoaService {
     public void incluir(PessoaDto pessoa) {
         mapPessoas.put(pessoa.getApelido(), pessoa);
     }
+    
+    public Optional<PessoaDto> alterar(String apelido, PessoaDto pessoa) {
+        if (!mapPessoas.containsKey(apelido)) {
+            return Optional.empty();
+        }
+        pessoa.setApelido(apelido);
+        mapPessoas.put(apelido, pessoa);
+        return Optional.of(pessoa);
+    }
+    
+    public Optional<String> excluir(String apelido) {
+        if (!mapPessoas.containsKey(apelido)) {
+            return Optional.empty();
+        }
+        mapPessoas.remove(apelido);
+        return Optional.of(apelido);
+    }
 
 }
