@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <main>
+            <h1>Exemplo upload de arquivos - POST direto</h1>
+            <form method="post" enctype="multipart/form-data" action="/api/fotos">
+                <input type="file" name="arquivo" />
+                <button type="submit">Enviar arquivo</button>
+            </form>
+            <hr/>
+            <h1>Exemplo upload de arquivos - Via Javascript/FormData</h1>
+            <form id="formUpload">
+                <input type="file" name="arquivo" />
+                <button type="submit">Enviar arquivo</button>
+            </form>
+        </main>
+        <script>
+            async function uploadArquivo(evt) {
+                evt.preventDefault();
+                const dados = new FormData(document.getElementById('formUpload'));
+                const httpResp = await fetch('/api/fotos', {
+                    method: 'post',
+                    body: dados
+                });
+                if (!httpResp.ok) {
+                    alert('Erro na requisição - ' + httpResp.status);
+                    return;
+                }
+                alert('Upload feito com sucesso');
+            }
+            document.getElementById('formUpload').onsubmit = uploadArquivo;
+        </script>
+    </body>
+</html>
