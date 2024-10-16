@@ -23,7 +23,11 @@ public class FotoUploadController {
     @PostMapping
     public ResponseEntity<?> receberArquivo(@RequestParam MultipartFile arquivo) {
         
-        Path destino = Path.of("C:\\tads\\dsw\\servidor-destino",arquivo.getOriginalFilename());
+//        if (!arquivo.getOriginalFilename().endsWith("pdf")) {
+//            return ResponseEntity.badRequest().build();
+//        }
+        
+        Path destino = Path.of("C:\\tads\\dsw\\servidor-destino", arquivo.getOriginalFilename());
         try {
             Files.copy(arquivo.getInputStream(), destino, StandardCopyOption.REPLACE_EXISTING);
         } catch(IOException ex) {
