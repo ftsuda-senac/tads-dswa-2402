@@ -5,7 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 public class Pessoa {
@@ -27,6 +31,12 @@ public class Pessoa {
     private String telefone;
     
     private String senha;
+    
+    @ManyToMany
+    @JoinTable(name = "pessoa_interesse",
+            joinColumns = @JoinColumn(name = "pessoa_id"),
+            inverseJoinColumns = @JoinColumn(name = "interesse_nome"))
+    private Set<Interesse> interesses;
 
     public Integer getId() {
         return id;
@@ -82,6 +92,14 @@ public class Pessoa {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Set<Interesse> getInteresses() {
+        return interesses;
+    }
+
+    public void setInteresses(Set<Interesse> interesses) {
+        this.interesses = interesses;
     }
     
 }
