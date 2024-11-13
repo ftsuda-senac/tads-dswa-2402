@@ -93,7 +93,7 @@ public class SecurityConfig {
                 .formLogin(formLogin -> formLogin.disable())
                 .authorizeHttpRequests(authorize
                         -> authorize
-                        .requestMatchers("/login", "/paginas/**",
+                        .requestMatchers("/login", "/login.html", "/me.html",
                                 "/h2-console/**",
                                 "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
 //                        .requestMatchers("/peao").hasAuthority("SCOPE_PEAO")
